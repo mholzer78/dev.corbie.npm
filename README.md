@@ -37,21 +37,6 @@
   </a>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#install">Install</a></li>
-        <li><a href="#how-to-use">How to use?</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
@@ -96,7 +81,7 @@ cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 <tr>
 <td>hex
 </td>
-<td>#ffd801[^1]
+<td>(#)ffd801
 </td>
 <td>ffd801
 </td>
@@ -104,38 +89,36 @@ cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 <tr>
 <td>rgb
 </td>
-<td colspan="2">[255,216,1]
+<td colspan="2" align="center">[255,216,1]
 </td>
 </tr>
 <tr>
 <td>hwb
 </td>
-<td colspan="2">[51,0,0]
+<td colspan="2" align="center">[51,0,0]
 </td>
 </tr>
 <tr>
 <td>hsv
 </td>
-<td colspan="2">[51,100,100]
+<td colspan="2" align="center">[51,100,100]
 </td>
 </tr>
 <tr>
 <td>hsl
 </td>
-<td colspan="2">[51,100,50]
+<td colspan="2" align="center">[51,100,50]
 </td>
 </tr>
 <tr>
 <td>cmyk
 </td>
-<td colspan="2">[0,15,100,0]
+<td colspan="2" align="center">[0,15,100,0]
 </td>
 </tr>
 </table>
 
 > **_NOTE:_** More input options, like multiple parameters instead of an array will come soon and maybe later also an option to choose the output aswell.
-
-[^1]: The # (hash) is optional
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
