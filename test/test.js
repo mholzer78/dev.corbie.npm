@@ -8,7 +8,7 @@ Array.prototype.equals = function (array) {
   // compare lengths - can save a lot of time
   if (this.length != array.length) return false;
 
-  for (var i = 0, l = this.length; i < l; i++) {
+  for (let i = 0, l = this.length; i < l; i++) {
     // Check if we have nested arrays
     if (this[i] instanceof Array && array[i] instanceof Array) {
       // recurse into the nested arrays
@@ -23,13 +23,13 @@ Array.prototype.equals = function (array) {
 // Hide method from for-in loops
 Object.defineProperty(Array.prototype, "equals", { enumerable: false });
 
-var hex = "ffd801";
-var rgb = [255,216,1];
-var hwb = [51, 0, 0];
-var hsv = [51, 100, 100];
-var hsl = [51, 100, 50];
-var cmyk = [0,15,100,0];
-//console.log(cbConvert);
+let hex = "ffd801";
+let rgb = [255,216,1];
+let hwb = [51, 0, 0];
+let hsv = [51, 100, 100];
+let hsl = [51, 100, 50];
+let cmyk = [0,15,100,0];
+
 console.log("--- RGB ---");
 console.log("2hex", cbConvert.rgb.hex(rgb) == hex);
 console.log("2hwb", cbConvert.rgb.hwb(rgb).equals(hwb));
