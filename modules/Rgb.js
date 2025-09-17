@@ -1,8 +1,6 @@
-import { Color } from "./Color.js";
+import Color from "./Color.js";
 
-export { Rgb };
-
-class Rgb extends Color {
+export default class Rgb extends Color {
   validate = (value) => {
     let err = 0;
     if (typeof value !== "object") {

@@ -1,8 +1,6 @@
-import { Color } from "./Color.js";
+import Color from "./Color.js";
 
-export { Hwb };
-
-class Hwb extends Color {
+export default class Hwb extends Color {
   validate = (value) => {};
 
   toRgb(hwb) {

@@ -1,6 +1,4 @@
-export { Color };
-
-class Color {
+export default class Color {
   constructor(rgb) {
     this.master = rgb;
   }
@@ -10,7 +8,7 @@ class Color {
   hsv = (value) => this.toHsv(value);
   hsl = (value) => this.toHsl(value);
   cmyk = (value) => this.toCmyk(value);
-
+  
   toHex(value) {
     this.validate(value);
     return this.master.toHex(this.toRgb(value));

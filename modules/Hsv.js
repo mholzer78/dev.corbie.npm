@@ -1,8 +1,6 @@
-import { Color } from "./Color.js";
+import Color from "./Color.js";
 
-export { Hsv };
-
-class Hsv extends Color {
+export default class Hsv extends Color {
   validate = (value) => {};
 
   toRgb(hsv) {

@@ -1,8 +1,6 @@
-import { Color } from "./Color.js";
+import Color from "./Color.js";
 
-export { Hex };
-
-class Hex extends Color {
+export default class Hex extends Color {
   validate = (value) => {
     let err = 0;
     if (typeof value !== "string") {

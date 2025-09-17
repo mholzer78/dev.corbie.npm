@@ -1,6 +1,6 @@
 {
-  "name": "@corbie.dev/convert",
-  "version": "0.0.1",
+  "name": "@corbie.dev/color-convert",
+  "version": "0.0.2",
   "description": "Color converter (HEX, RGB, CMYK, HSL, HSV, ...)",
   "main": "index.js",
   "type": "module",
@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/mholzer78/color-calculate/issues"
   },
-  "homepage": "https://github.com/mholzer78/color-calculate#readme",
+  "homepage": "https://corbie.dev",
   "devDependencies": {
 
   }

@@ -1,4 +1,4 @@
-import { cbConvert } from "../index.js";
+import cbConvert from "../index.js";
 
 Array.prototype.equals = function (array) {
   // if the other array is a falsy value, return

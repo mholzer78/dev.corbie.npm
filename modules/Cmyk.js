@@ -1,8 +1,6 @@
-import { Color } from "./Color.js";
+import Color from "./Color.js";
 
-export { Cmyk };
-
-class Cmyk extends Color {
+export default class Cmyk extends Color {
   validate = (value) => {
     let err = 0;
     if (typeof value !== "object") {
