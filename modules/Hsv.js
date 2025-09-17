@@ -1,13 +1,14 @@
 import Color from "./Color.js";
 
 export default class Hsv extends Color {
-  validate = (value) => {};
+  validArray = [360, 100, 100];
 
-  toRgb(hsv) {
-    this.validate(hsv);
-    let h = hsv[0] / 360;
-    let s = hsv[1] / 100;
-    let v = hsv[2] / 100;
+  toRgb(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    let h = value[0] / 360;
+    let s = value[1] / 100;
+    let v = value[2] / 100;
     let r, g, b, i, f, p, q, t;
     i = Math.floor(h * 6);
     f = h * 6 - i;

@@ -41,7 +41,7 @@
 
 ## About The Project
 
-You might or might not know about <a href="https://corbie.dev">https://corbie.dev</a> but what you can do there is convert colors from one space to another. And here we go with that. I've taken the logic out and put it into an NPM package for you to use.
+You might or might not know about <a href="https://corbie.dev">https://corbie.dev</a> but one thing you can do there, is to convert colors from one space to another. And here we go with that. I've taken the logic out and put it into an NPM package for you to use.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -62,7 +62,7 @@ The prefix cb is short for corbie to prevent clashes with other convert libaries
 With the import in place you can already use the libary like this:
 
 ```javascript
-cbConvert.rgb.cmyk([255, 216, 1]); // [0,15,100,0]
+cbConvert.rgb.cmyk(255, 216, 1); // [0,15,100,0]
 cbConvert.hwb.hsl([51, 0, 0]); // [51,0,0]
 cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 ```
@@ -71,56 +71,18 @@ cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 
 ### What comes in and what comes out?
 
-<table>
-<tr>
-<th>color-space
-</th>
-<th>input
-</th>
-<th>output
-</th>
-</tr>
-<tr>
-<td>hex
-</td>
-<td>(#)ffd801
-</td>
-<td>ffd801
-</td>
-</tr>
-<tr>
-<td>rgb
-</td>
-<td colspan="2" align="center">[255,216,1]
-</td>
-</tr>
-<tr>
-<td>hwb
-</td>
-<td colspan="2" align="center">[51,0,0]
-</td>
-</tr>
-<tr>
-<td>hsv
-</td>
-<td colspan="2" align="center">[51,100,100]
-</td>
-</tr>
-<tr>
-<td>hsl
-</td>
-<td colspan="2" align="center">[51,100,50]
-</td>
-</tr>
-<tr>
-<td>cmyk
-</td>
-<td colspan="2" align="center">[0,15,100,0]
-</td>
-</tr>
-</table>
+| color-space | input                | output   | example                    |
+| ----------- | -------------------- | -------- | -------------------------- |
+| hex         | string               | string   | ffd801                     |
+| rgb         | 3 params or Array[3] | Array[3] | 255,216,1 or [255,216,1]   |
+| hwb         | 3 params or Array[3] | Array[3] | 51,0,0 or [51,0,0]         |
+| hsv         | 3 params or Array[3] | Array[3] | 51,100,100 or [51,100,100] |
+| hsl         | 3 params or Array[3] | Array[3] | 51,100,50 or [51,100,50]   |
+| cmyk        | 4 params or Array[4] | Array[4] | 0,15,100,0 or [0,15,100,0] |
 
-> **_NOTE:_** More input options, like multiple parameters instead of an array will come soon and maybe later also an option to choose the output aswell.
+> **_NOTE:_** For the HEX input the leading # (hash) is optional, the output won't include it.
+
+More input options, like multiple parameters instead of an array will come soon and maybe later also an option to choose the output aswell.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

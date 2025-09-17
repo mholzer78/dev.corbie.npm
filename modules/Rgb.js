@@ -1,38 +1,18 @@
 import Color from "./Color.js";
 
 export default class Rgb extends Color {
-  validate = (value) => {
-    let err = 0;
-    if (typeof value !== "object") {
-      err = 1;
-    } else if (value.length !== 3) {
-      err = 1;
-    } else {
-      [...value].forEach((val) => {
-        if (typeof val !== "number") {
-          err = 1;
-        } else if (val < 0 || val > 255) {
-          err = 2;
-        }
-      });
-    }
-    if (err == 1) {
-      throw new Error("Wrong input format. Should be: [number,number,number]");
-    } else if (err == 2) {
-      throw new Error(
-        "Wrong input format. Each item should be between 0 and 255"
-      );
-    }
-  };
+  validArray = [255, 255, 255];
 
-  toHex = (rgb) => {
-    this.validate(rgb);
-    return rgb.map((x) => x.toString(16).padStart(2, "0")).join("");
-  };
+  toHex(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    return value.map((x) => x.toString(16).padStart(2, "0")).join("");
+  }
 
-  toCmyk = (rgb, normalized = false) => {
-    this.validate(rgb);
-    const [r, g, b] = this.splitRgb(rgb, 255);
+  toCmyk(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 255);
     let c = 1 - r;
     let m = 1 - g;
     let y = 1 - b;
@@ -42,12 +22,10 @@ export default class Rgb extends Color {
     m = (m - k) / (1 - k);
     y = (y - k) / (1 - k);
 
-    if (!normalized) {
-      c = Math.round(c * 10000) / 100;
-      m = Math.round(m * 10000) / 100;
-      y = Math.round(y * 10000) / 100;
-      k = Math.round(k * 10000) / 100;
-    }
+    c = Math.round(c * 10000) / 100;
+    m = Math.round(m * 10000) / 100;
+    y = Math.round(y * 10000) / 100;
+    k = Math.round(k * 10000) / 100;
 
     c = isNaN(c) ? 0 : Math.round(c);
     m = isNaN(m) ? 0 : Math.round(m);
@@ -55,11 +33,12 @@ export default class Rgb extends Color {
     k = isNaN(k) ? 0 : Math.round(k);
 
     return [c, m, y, k];
-  };
+  }
 
-  toHwb = (rgb) => {
-    this.validate(rgb);
-    const [r, g, b] = this.splitRgb(rgb, 255);
+  toHwb(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 255);
     const maxC = Math.max(r, g, b);
     const minC = Math.min(r, g, b);
 
@@ -68,11 +47,12 @@ export default class Rgb extends Color {
     const black = Math.round((1 - maxC) * 100);
 
     return [hue, white, black];
-  };
+  }
 
-  toHsv = (rgb) => {
-    this.validate(rgb);
-    const [r, g, b] = this.splitRgb(rgb, 1);
+  toHsv(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 1);
     let max = Math.max(r, g, b),
       min = Math.min(r, g, b),
       delta = max - min,
@@ -81,16 +61,13 @@ export default class Rgb extends Color {
 
     let hue = this.getHue(r, g, b);
 
-    return [
-      hue,
-      Math.round(sat * 100),
-      Math.round(val * 100),
-    ];
-  };
+    return [hue, Math.round(sat * 100), Math.round(val * 100)];
+  }
 
-  toHsl = (rgb) => {
-    this.validate(rgb);
-    const [r, g, b] = this.splitRgb(rgb, 255);
+  toHsl(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 255);
 
     let cmin = Math.min(r, g, b),
       cmax = Math.max(r, g, b),
@@ -108,14 +85,14 @@ export default class Rgb extends Color {
     light = +(light * 100).toFixed(1);
 
     return [hue, Math.round(sat), Math.round(light)];
-  };
+  }
 
   splitRgb(rgb, divider = 1) {
     const [r, g, b] = rgb;
     return [r / divider, g / divider, b / divider];
   }
 
-  getHue = (r, g, b) => {
+  getHue(r, g, b) {
     const maxC = Math.max(r, g, b);
     const minC = Math.min(r, g, b);
     const delta = maxC - minC;
@@ -130,5 +107,5 @@ export default class Rgb extends Color {
     }
 
     return Math.round(hue);
-  };
+  }
 }

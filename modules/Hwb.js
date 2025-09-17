@@ -1,11 +1,12 @@
 import Color from "./Color.js";
 
 export default class Hwb extends Color {
-  validate = (value) => {};
+  validArray = [360, 100, 100];
 
-  toRgb(hwb) {
-    this.validate(hwb);
-    let [hue, white, black] = hwb;
+  toRgb(p1, p2, p3, p4) {
+    let value = this.getParam(p1, p2, p3, p4);
+    this.validate(value);
+    let [hue, white, black] = value;
     white /= 100;
     black /= 100;
     if (white + black >= 1) {
@@ -23,7 +24,7 @@ export default class Hwb extends Color {
     return [r, g, b];
   }
 
-  hsl2rgb4hwb = (hue, sat, light) => {
+  hsl2rgb4hwb(hue, sat, light) {
     sat /= 100;
     light /= 100;
 
@@ -34,5 +35,5 @@ export default class Hwb extends Color {
     }
 
     return [f(0), f(8), f(4)];
-  };
+  }
 }
