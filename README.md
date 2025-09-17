@@ -69,6 +69,8 @@ cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 
 > **_NOTE:_** cbConvert is still an example but if you change its name in the import you need to use that name here aswell
 
+### What comes in and what comes out?
+
 <table>
 <tr>
 <th>color-space
