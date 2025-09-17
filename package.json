@@ -1,0 +1,28 @@
+{
+  "name": "@corbie.dev/convert",
+  "version": "0.0.1",
+  "description": "Color converter (HEX, RGB, CMYK, HSL, HSV, ...)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mholzer78/color-calculate.git"
+  },
+  "keywords": [
+    "HEX",
+    "RGB",
+    "CMYK",
+    "HSL",
+    "HSV"
+  ],
+  "author": "Michael Holzer <michael@die-holzers.at>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mholzer78/color-calculate/issues"
+  },
+  "homepage": "https://github.com/mholzer78/color-calculate#readme",
+  "devDependencies": {
+
+  }
+}
