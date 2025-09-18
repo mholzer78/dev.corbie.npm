@@ -1,10 +1,10 @@
-import Color from "./Color.js";
+import ColorNotRgb from "./ColorNotRgb.js";
 
-export default class Hsl extends Color {
+export default class Hsl extends ColorNotRgb {
   validArray = [360, 100, 100];
 
-  toRgb(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toRgb(...items) {
+    const value = items.flat();
     this.validate(value);
     const h = value[0];
     const s = value[1] / 100;

@@ -3,14 +3,20 @@ import Color from "./Color.js";
 export default class Rgb extends Color {
   validArray = [255, 255, 255];
 
-  toHex(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toRgb(...items) {
+    const value = items.flat();
+    this.validate(value);
+    return value;
+  }
+
+  toHex(...items) {
+    const value = items.flat();
     this.validate(value);
     return value.map((x) => x.toString(16).padStart(2, "0")).join("");
   }
 
-  toCmyk(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toCmyk(...items) {
+    const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
     let c = 1 - r;
@@ -35,77 +41,110 @@ export default class Rgb extends Color {
     return [c, m, y, k];
   }
 
-  toHwb(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toHwb(...items) {
+    const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
-    const maxC = Math.max(r, g, b);
-    const minC = Math.min(r, g, b);
-
-    let hue = this.getHue(r, g, b);
-    const white = Math.round(minC * 100);
-    const black = Math.round((1 - maxC) * 100);
-
-    return [hue, white, black];
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b);
+    let chroma = max - min;
+    let hue, white, black;
+    if (chroma == 0) {
+      hue = 0;
+    } else if (r == max) {
+      hue = (((g - b) / chroma) % 6) * 360;
+    } else if (g == max) {
+      hue = (((b - r) / chroma + 2) % 6) * 360;
+    } else {
+      hue = (((r - g) / chroma + 4) % 6) * 360;
+    }
+    white = min;
+    black = 1 - max;
+    return [
+      Math.round(hue / 6),
+      Math.round(white * 100),
+      Math.round(black * 100),
+    ];
   }
 
-  toHsv(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    const [r, g, b] = this.splitRgb(value, 1);
-    let max = Math.max(r, g, b),
-      min = Math.min(r, g, b),
-      delta = max - min,
-      sat = max === 0 ? 0 : delta / max,
-      val = max / 255;
-
-    let hue = this.getHue(r, g, b);
-
-    return [hue, Math.round(sat * 100), Math.round(val * 100)];
-  }
-
-  toHsl(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toHsv(...items) {
+    const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let hue = 0;
+    let sat;
+    let val = max;
 
-    let cmin = Math.min(r, g, b),
-      cmax = Math.max(r, g, b),
-      delta = cmax - cmin,
-      sat = 0,
-      light = 0;
+    var delta = max - min;
+    sat = max == 0 ? 0 : delta / max;
 
-    let hue = this.getHue(r, g, b);
+    if (max == min) {
+      hue = 0; // achromatic
+    } else {
+      switch (max) {
+        case r:
+          hue = (g - b) / delta + (g < b ? 6 : 0);
+          break;
+        case g:
+          hue = (b - r) / delta + 2;
+          break;
+        case b:
+          hue = (r - g) / delta + 4;
+          break;
+      }
 
-    light = (cmax + cmin) / 2;
+      hue /= 6;
+    }
 
-    sat = delta == 0 ? 0 : delta / (1 - Math.abs(2 * light - 1));
+    return [
+      Math.round(hue * 360),
+      Math.round(sat * 100),
+      Math.round(val * 100),
+    ];
+  }
 
-    sat = +(sat * 100).toFixed(1);
-    light = +(light * 100).toFixed(1);
+  toHsl(...items) {
+    const value = items.flat();
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 255);
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b);
+    let hue = 0;
+    let sat;
+    let light = (max + min) / 2;
 
-    return [hue, Math.round(sat), Math.round(light)];
+    if (max == min) {
+      hue = sat = 0; // achromatic
+    } else {
+      let delta = max - min;
+      sat = light > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+
+      switch (max) {
+        case r:
+          hue = (g - b) / delta + (g < b ? 6 : 0);
+          break;
+        case g:
+          hue = (b - r) / delta + 2;
+          break;
+        case b:
+          hue = (r - g) / delta + 4;
+          break;
+      }
+
+      hue /= 6;
+    }
+
+    return [
+      Math.round(hue * 360),
+      Math.round(sat * 100),
+      Math.round(light * 100),
+    ];
   }
 
   splitRgb(rgb, divider = 1) {
     const [r, g, b] = rgb;
     return [r / divider, g / divider, b / divider];
-  }
-
-  getHue(r, g, b) {
-    const maxC = Math.max(r, g, b);
-    const minC = Math.min(r, g, b);
-    const delta = maxC - minC;
-    let hue = 0;
-
-    if (maxC === r) {
-      hue = (60 * ((g - b) / delta)) % 360;
-    } else if (maxC == g) {
-      hue = 60 * ((b - r) / delta) + 120;
-    } else if (maxC == b) {
-      hue = 60 * ((r - g) / delta) + 240;
-    }
-
-    return Math.round(hue);
   }
 }

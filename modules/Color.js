@@ -1,50 +1,31 @@
 export default class Color {
-  constructor(rgb) {
-    this.master = rgb;
+  validArray = [0, 0, 0];
+
+  hex(...items) {
+    return this.toHex(items.flat());
+  }
+  rgb(...items) {
+    return this.toRgb(items.flat());
+  }
+  hwb(...items) {
+    return this.toHwb(items.flat());
+  }
+  hsv(...items) {
+    return this.toHsv(items.flat());
+  }
+  hsl(...items) {
+    return this.toHsl(items.flat());
+  }
+  cmyk(...items) {
+    return this.toCmyk(items.flat());
   }
 
-  hex = (p1, p2, p3, p4) => this.toHex(p1, p2, p3, p4);
-  rgb = (p1, p2, p3, p4) => this.toRgb(p1, p2, p3, p4);
-  hwb = (p1, p2, p3, p4) => this.toHwb(p1, p2, p3, p4);
-  hsv = (p1, p2, p3, p4) => this.toHsv(p1, p2, p3, p4);
-  hsl = (p1, p2, p3, p4) => this.toHsl(p1, p2, p3, p4);
-  cmyk = (p1, p2, p3, p4) => this.toCmyk(p1, p2, p3, p4);
-
-  toHex(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    return this.master.toHex(this.toRgb(value));
-  }
-  toHwb(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    return this.master.toHwb(this.toRgb(value));
-  }
-  toHsv(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    return this.master.toHsv(this.toRgb(value));
-  }
-  toHsl(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    return this.master.toHsl(this.toRgb(value));
-  }
-  toCmyk(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
-    this.validate(value);
-    return this.master.toCmyk(this.toRgb(value));
-  }
-
-  getParam(p1, p2, p3, p4) {
-    if (p4 !== undefined) {
-      return [p1, p2, p3, p4];
-    } else if (p2 !== undefined && p3 !== undefined) {
-      return [p1, p2, p3];
-    } else {
-      return p1;
-    }
-  }
+  toHex() {}
+  toRgb() {}
+  toHwb() {}
+  toHsv() {}
+  toHsl() {}
+  toCmyk() {}
 
   validate = (value) => {
     let err = 0;

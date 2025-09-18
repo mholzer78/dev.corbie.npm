@@ -1,10 +1,10 @@
-import Color from "./Color.js";
+import ColorNotRgb from "./ColorNotRgb.js";
 
-export default class Cmyk extends Color {
+export default class Cmyk extends ColorNotRgb {
   validArray = [100, 100, 100, 100];
 
-  toRgb(p1, p2, p3, p4) {
-    let value = this.getParam(p1, p2, p3, p4);
+  toRgb(...items) {
+    const value = items.flat();
     this.validate(value);
     let c = value[0] / 100;
     let m = value[1] / 100;
