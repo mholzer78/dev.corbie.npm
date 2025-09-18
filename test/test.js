@@ -7,7 +7,6 @@ let hsv = [51, 100, 100];
 let hsl = [51, 100, 50];
 let cmyk = [0,15,100,0];
 
-//console.log("2hex", cbConvert.hsv.hex(255,100,100));
 console.log("--- HEX ---");
 console.log("2hex", hex == cbConvert.hex.hex(hex), cbConvert.hex.hex(hex));
 console.log("2rgb", rgb == cbConvert.hex.rgb(hex).toString(), cbConvert.hex.rgb(hex));

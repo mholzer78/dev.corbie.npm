@@ -47,11 +47,11 @@ export default class Rgb extends Color {
     const [r, g, b] = this.splitRgb(value, 255);
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
-    let hue = 0;
+    let hue;
     let sat;
     let val = max;
+    let delta = max - min;
 
-    var delta = max - min;
     sat = max == 0 ? 0 : delta / max;
 
     if (max == min) {
