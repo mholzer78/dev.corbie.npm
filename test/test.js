@@ -1,27 +1,4 @@
-import cbConvert from "../index.js";
-
-Array.prototype.equals = function (array) {
-  // if the other array is a falsy value, return
-  if (!array) return false;
-  // if the argument is the same array, we can be sure the contents are same as well
-  if (array === this) return true;
-  // compare lengths - can save a lot of time
-  if (this.length != array.length) return false;
-
-  for (let i = 0, l = this.length; i < l; i++) {
-    // Check if we have nested arrays
-    if (this[i] instanceof Array && array[i] instanceof Array) {
-      // recurse into the nested arrays
-      if (!this[i].equals(array[i])) return false;
-    } else if (this[i] != array[i]) {
-      // Warning - two different object instances will never be equal: {x:20} != {x:20}
-      return false;
-    }
-  }
-  return true;
-};
-// Hide method from for-in loops
-Object.defineProperty(Array.prototype, "equals", { enumerable: false });
+import cbConvert from "../dist/index.js";
 
 let hex = "ffd801";
 let rgb = [255,216,1];
@@ -32,12 +9,12 @@ let cmyk = [0,15,100,0];
 
 //console.log("2hex", cbConvert.hsv.hex(255,100,100));
 console.log("--- HEX ---");
-console.log("2hex", cbConvert.hex.hex(hex));
-console.log("2rgb", cbConvert.hex.rgb(hex));
-console.log("2hwb", cbConvert.hex.hwb(hex));
-console.log("2hsv", cbConvert.hex.hsv(hex));
-console.log("2hsl", cbConvert.hex.hsl(hex));
-console.log("2cmy", cbConvert.hex.cmyk(hex));
+console.log("2hex", hex == cbConvert.hex.hex(hex), cbConvert.hex.hex(hex));
+console.log("2rgb", rgb == cbConvert.hex.rgb(hex).toString(), cbConvert.hex.rgb(hex));
+console.log("2hwb", hwb == cbConvert.hex.hwb(hex).toString(), cbConvert.hex.hwb(hex));
+console.log("2hsv", hsv == cbConvert.hex.hsv(hex).toString(), cbConvert.hex.hsv(hex));
+console.log("2hsl", hsl == cbConvert.hex.hsl(hex).toString(), cbConvert.hex.hsl(hex));
+console.log("2cmy", cmyk == cbConvert.hex.cmyk(hex).toString(), cbConvert.hex.cmyk(hex));
 console.log("--- WITH ARRAYS ---");
 console.log("--- RGB ---");
 console.log("2hex", cbConvert.rgb.hex(rgb));

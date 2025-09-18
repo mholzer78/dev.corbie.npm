@@ -1,47 +1,21 @@
-import Color from "./Color.js";
+import Color, { CmykType, DefaultType } from "./Color.js";
 
 export default class Rgb extends Color {
   validArray = [255, 255, 255];
 
-  toRgb(...items) {
-    const value = items.flat();
-    this.validate(value);
-    return value;
-  }
-
-  toHex(...items) {
+  toHex (...items): string {
     const value = items.flat();
     this.validate(value);
     return value.map((x) => x.toString(16).padStart(2, "0")).join("");
   }
 
-  toCmyk(...items) {
-    const value = items.flat();
+  toRgb(...items): DefaultType {
+    const value = items.flat() as DefaultType;
     this.validate(value);
-    const [r, g, b] = this.splitRgb(value, 255);
-    let c = 1 - r;
-    let m = 1 - g;
-    let y = 1 - b;
-    let k = Math.min(c, Math.min(m, y));
-
-    c = (c - k) / (1 - k);
-    m = (m - k) / (1 - k);
-    y = (y - k) / (1 - k);
-
-    c = Math.round(c * 10000) / 100;
-    m = Math.round(m * 10000) / 100;
-    y = Math.round(y * 10000) / 100;
-    k = Math.round(k * 10000) / 100;
-
-    c = isNaN(c) ? 0 : Math.round(c);
-    m = isNaN(m) ? 0 : Math.round(m);
-    y = isNaN(y) ? 0 : Math.round(y);
-    k = isNaN(k) ? 0 : Math.round(k);
-
-    return [c, m, y, k];
+    return value;
   }
 
-  toHwb(...items) {
+  toHwb(...items): DefaultType {
     const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
@@ -67,7 +41,7 @@ export default class Rgb extends Color {
     ];
   }
 
-  toHsv(...items) {
+  toHsv(...items): DefaultType {
     const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
@@ -105,7 +79,7 @@ export default class Rgb extends Color {
     ];
   }
 
-  toHsl(...items) {
+  toHsl(...items): DefaultType {
     const value = items.flat();
     this.validate(value);
     const [r, g, b] = this.splitRgb(value, 255);
@@ -141,6 +115,31 @@ export default class Rgb extends Color {
       Math.round(sat * 100),
       Math.round(light * 100),
     ];
+  }
+  toCmyk(...items): CmykType {
+    const value = items.flat();
+    this.validate(value);
+    const [r, g, b] = this.splitRgb(value, 255);
+    let c = 1 - r;
+    let m = 1 - g;
+    let y = 1 - b;
+    let k = Math.min(c, Math.min(m, y));
+
+    c = (c - k) / (1 - k);
+    m = (m - k) / (1 - k);
+    y = (y - k) / (1 - k);
+
+    c = Math.round(c * 10000) / 100;
+    m = Math.round(m * 10000) / 100;
+    y = Math.round(y * 10000) / 100;
+    k = Math.round(k * 10000) / 100;
+
+    c = isNaN(c) ? 0 : Math.round(c);
+    m = isNaN(m) ? 0 : Math.round(m);
+    y = isNaN(y) ? 0 : Math.round(y);
+    k = isNaN(k) ? 0 : Math.round(k);
+
+    return [c, m, y, k];
   }
 
   splitRgb(rgb, divider = 1) {

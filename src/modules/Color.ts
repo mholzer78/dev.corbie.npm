@@ -1,31 +1,34 @@
-export default class Color {
+export type DefaultType = [number, number, number];
+export type CmykType = [number, number, number, number];
+
+export default abstract class Color {
   validArray = [0, 0, 0];
 
-  hex(...items) {
+  hex(...items): string {
     return this.toHex(items.flat());
   }
-  rgb(...items) {
+  rgb(...items): DefaultType {
     return this.toRgb(items.flat());
   }
-  hwb(...items) {
+  hwb(...items): DefaultType {
     return this.toHwb(items.flat());
   }
-  hsv(...items) {
+  hsv(...items): DefaultType {
     return this.toHsv(items.flat());
   }
-  hsl(...items) {
+  hsl(...items): DefaultType {
     return this.toHsl(items.flat());
   }
-  cmyk(...items) {
+  cmyk(...items): CmykType {
     return this.toCmyk(items.flat());
   }
 
-  toHex() {}
-  toRgb() {}
-  toHwb() {}
-  toHsv() {}
-  toHsl() {}
-  toCmyk() {}
+  abstract toHex(items);
+  abstract toRgb(items);
+  abstract toHwb(items);
+  abstract toHsv(items);
+  abstract toHsl(items);
+  abstract toCmyk(items);
 
   validate = (value) => {
     let err = 0;

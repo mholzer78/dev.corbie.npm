@@ -1,8 +1,8 @@
 import Color from "./Color.js";
 import Rgb from "./Rgb.js";
 
-export default class ColorNotRgb extends Color {
-  master = Rgb;
+export default abstract class ColorNotRgb extends Color {
+  master: Rgb;
 
   constructor(rgb) {
     super();

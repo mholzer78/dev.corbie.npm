@@ -1,9 +1,10 @@
 import ColorNotRgb from "./ColorNotRgb.js";
+import { DefaultType } from "./Color";
 
 export default class Cmyk extends ColorNotRgb {
   validArray = [100, 100, 100, 100];
 
-  toRgb(...items) {
+  toRgb(...items): DefaultType {
     const value = items.flat();
     this.validate(value);
     let c = value[0] / 100;
