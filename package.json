@@ -7,7 +7,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mholzer78/color-calculate.git"
+    "url": "git+https://github.com/mholzer78/dev.corbie.api.git"
   },
   "keywords": [
     "HEX",
@@ -20,7 +20,7 @@
   "author": "Michael Holzer <michael@die-holzers.at>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mholzer78/color-calculate/issues"
+    "url": "https://github.com/mholzer78/dev.corbie.api/issues"
   },
   "homepage": "https://corbie.dev",
   "devDependencies": {

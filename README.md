@@ -71,11 +71,11 @@ cbConvert.hex.rgb("#ffd801"); // [255,216,1]
 
 ### What comes in and what comes out?
 
-| color-space        | input                | output   | example                        |
-| ------------------ | -------------------- | -------- | ------------------------------ |
-| hex                | string               | string   | `#ffd801` or `ffd801`          |
-| rgb, hwb, hsv, hsl | 3 params or Array[3] | Array[3] | `255,216,1` or `[255,216,1]`   |
-| cmyk               | 4 params or Array[4] | Array[4] | `0,15,100,0` or `[0,15,100,0]` |
+| color-space        | input                | example                        | output   |
+| ------------------ | -------------------- | ------------------------------ | -------- |
+| hex                | string               | `#ffd801` or `ffd801`          | string   |
+| rgb, hwb, hsv, hsl | 3 params or Array[3] | `255,216,1` or `[255,216,1]`   | Array[3] |
+| cmyk               | 4 params or Array[4] | `0,15,100,0` or `[0,15,100,0]` | Array[4] |
 
 > **_NOTE:_** For the HEX input the leading # (hash) is optional, the output won't include it.
 
