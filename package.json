@@ -1,6 +1,6 @@
 {
   "name": "@corbie.dev/color-convert",
-  "version": "0.0.8",
+  "version": "0.0.9beta",
   "description": "Color converter (HEX, RGB, CMYK, HSL, HSV, ...)",
   "main": "dist/index.js",
   "type": "module",

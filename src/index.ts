@@ -5,7 +5,7 @@ import Hwb from "./modules/Hwb.js";
 import Hsv from "./modules/Hsv.js";
 import Hsl from "./modules/Hsl.js";
 
-class CbConvert {
+class CbColorConvert {
   rgb = new Rgb();
   hex = new Hex(this.rgb);
   hwb = new Hwb(this.rgb);
@@ -14,6 +14,6 @@ class CbConvert {
   cmyk = new Cmyk(this.rgb);
 }
 
-const cbConvert = new CbConvert();
+const cbColorConvert = new CbColorConvert();
 
-export default cbConvert;
+export default cbColorConvert;

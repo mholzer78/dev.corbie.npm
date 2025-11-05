@@ -54,20 +54,20 @@ npm i @corbie.dev/color-convert
 ### How to use?
 
 ```javascript
-import cbConvert from "@corbie.dev/color-convert";
+import cbColorConvert from "@corbie.dev/color-convert";
 ```
 
-The prefix cb is short for corbie to prevent clashes with other convert libaries that you might use. But the name is up to you and cbConvert is only an example usage.
+The prefix cb is short for corbie to prevent clashes with other convert libaries that you might use. But the name is up to you and cbColorConvert is only an example usage.
 
 With the import in place you can already use the libary like this:
 
 ```javascript
-cbConvert.rgb.cmyk(255, 216, 1); // [0,15,100,0]
-cbConvert.hwb.hsl([51, 0, 0]); // [51,0,0]
-cbConvert.hex.rgb("#ffd801"); // [255,216,1]
+cbColorConvert.rgb.cmyk(255, 216, 1); // [0,15,100,0]
+cbColorConvert.hwb.hsl([51, 0, 0]); // [51,0,0]
+cbColorConvert.hex.rgb("#ffd801"); // [255,216,1]
 ```
 
-> **_NOTE:_** cbConvert is still an example but if you change its name in the import you need to use that name here aswell
+> **_NOTE:_** cbColorConvert is still an example but if you change its name in the import you need to use that name here aswell
 
 ### What comes in and what comes out?
 
