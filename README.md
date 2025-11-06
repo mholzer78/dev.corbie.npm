@@ -91,6 +91,10 @@ Project Link: [https://corbie.dev](https://corbie.dev)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Acknowledgments
+
+[totaltypescript.com](https://www.totaltypescript.com/how-to-create-an-npm-package) - Provided some great hints and tricks
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
