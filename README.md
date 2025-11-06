@@ -33,7 +33,7 @@
 
 <h1>corbie.dev - developers best buddy</h1>
   <a href="https://github.com/mholzer78/dev.corbie.www">
-    <img src="assets/corbie.svg" alt="Logo" width="80" height="80">
+    <img src="https://corbie.dev/assets/corbie.svg" alt="Logo" width="80" height="80">
   </a>
 </div>
 
@@ -54,7 +54,7 @@ npm i @corbie.dev/color-convert
 ### How to use?
 
 ```javascript
-import cbColorConvert from "@corbie.dev/color-convert";
+import cbColorConvert from '@corbie.dev/color-convert';
 ```
 
 The prefix cb is short for corbie to prevent clashes with other convert libaries that you might use. But the name is up to you and cbColorConvert is only an example usage.
@@ -64,7 +64,7 @@ With the import in place you can already use the libary like this:
 ```javascript
 cbColorConvert.rgb.cmyk(255, 216, 1); // [0,15,100,0]
 cbColorConvert.hwb.hsl([51, 0, 0]); // [51,0,0]
-cbColorConvert.hex.rgb("#ffd801"); // [255,216,1]
+cbColorConvert.hex.rgb('#ffd801'); // [255,216,1]
 ```
 
 > **_NOTE:_** cbColorConvert is still an example but if you change its name in the import you need to use that name here aswell

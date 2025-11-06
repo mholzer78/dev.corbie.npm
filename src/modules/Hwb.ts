@@ -2,52 +2,35 @@ import type { AnyColorType, DefaultType } from './Color.js';
 import ColorNotRgb from './ColorNotRgb.js';
 
 export default class Hwb extends ColorNotRgb {
-    override validArray = [360, 100, 100];
+  override validArray = [360, 100, 100];
 
-    toRgb(args: AnyColorType): DefaultType {
-        const value = args.flat() as DefaultType;
-        this.validate(value);
-        let [hue, white, black] = value;
-        var i,
-            rgb,
-            rgbArr: DefaultType = [0, 0, 0],
-            tot;
-        rgb = this.hslToRgb(hue, 1, 0.5);
-        rgbArr[0] = rgb.r / 255;
-        rgbArr[1] = rgb.g / 255;
-        rgbArr[2] = rgb.b / 255;
-        tot = white + black;
-        if (tot > 1) {
-            white = Number((white / tot).toFixed(2));
-            black = Number((black / tot).toFixed(2));
-        }
-        for (i = 0; i < 3; i++) {
-            rgbArr[i]! *= 1 - white - black;
-            rgbArr[i]! += white;
-            rgbArr[i] = Number(rgbArr[i]! * 255);
-        }
-        return rgbArr;
+  toRgb(args: AnyColorType): DefaultType {
+    const value = args as DefaultType;
+    this.validate(value);
+    let [hue, white, black] = value;
+    white /= 100;
+    black /= 100;
+
+    // ensure w + b ≤ 1
+    const ratio = white + black;
+    if (ratio > 1) {
+      white /= ratio;
+      black /= ratio;
     }
-    hslToRgb(hue: number, sat: number, light: number) {
-        var t1, t2, r, g, b;
-        hue = hue / 60;
-        if (light <= 0.5) {
-            t2 = light * (sat + 1);
-        } else {
-            t2 = light + sat - light * sat;
-        }
-        t1 = light * 2 - t2;
-        r = this.hueToRgb(t1, t2, hue + 2) * 255;
-        g = this.hueToRgb(t1, t2, hue) * 255;
-        b = this.hueToRgb(t1, t2, hue - 2) * 255;
-        return { r: r, g: g, b: b };
+
+    // temporary RGB from hue (HSV model with v = 1)
+    const f = (n: number) => {
+      const k = (n + hue / 60) % 6;
+      return 1 - Math.max(0, Math.min(k, 4 - k, 1));
+    };
+
+    const rgb = [f(5), f(3), f(1)];
+
+    // apply white and black mixing
+    for (let i = 0; i < 3; i++) {
+      rgb[i] = (rgb[i]! * (1 - white - black) + white) * 255;
     }
-    hueToRgb(t1: number, t2: number, hue: number) {
-        if (hue < 0) hue += 6;
-        if (hue >= 6) hue -= 6;
-        if (hue < 1) return (t2 - t1) * hue + t1;
-        else if (hue < 3) return t2;
-        else if (hue < 4) return (t2 - t1) * (4 - hue) + t1;
-        else return t1;
-    }
+
+    return rgb.map((v) => Math.round(v)) as DefaultType;
+  }
 }

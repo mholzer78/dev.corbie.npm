@@ -1,5 +1,5 @@
-import Color, { type DefaultType } from "./Color.js";
-import Rgb from "./Rgb.js";
+import Color, { type DefaultType } from './Color.js';
+import Rgb from './Rgb.js';
 
 export default abstract class ColorNotRgb extends Color {
   master: Rgb;

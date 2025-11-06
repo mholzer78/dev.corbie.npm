@@ -1,11 +1,11 @@
-import ColorNotRgb from "./ColorNotRgb.js";
-import type { AnyColorType, CmykType, DefaultType } from "./Color.js";
+import ColorNotRgb from './ColorNotRgb.js';
+import type { AnyColorType, CmykType, DefaultType } from './Color.js';
 
 export default class Cmyk extends ColorNotRgb {
   override validArray = [100, 100, 100, 100];
 
-  toRgb(args:AnyColorType): DefaultType {
-    const value = args.flat() as CmykType;
+  toRgb(args: AnyColorType): DefaultType {
+    const value = args as CmykType;
     this.validate(value);
     let c = value[0] / 100;
     let m = value[1] / 100;
