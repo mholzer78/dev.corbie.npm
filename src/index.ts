@@ -1,9 +1,9 @@
-import Rgb from "./modules/Rgb.js";
-import Hex from "./modules/Hex.js";
-import Cmyk from "./modules/Cmyk.js";
-import Hwb from "./modules/Hwb.js";
-import Hsv from "./modules/Hsv.js";
-import Hsl from "./modules/Hsl.js";
+import Rgb from './modules/Rgb.js';
+import Hex from './modules/Hex.js';
+import Cmyk from './modules/Cmyk.js';
+import Hwb from './modules/Hwb.js';
+import Hsv from './modules/Hsv.js';
+import Hsl from './modules/Hsl.js';
 
 class CbColorConvert {
   rgb = new Rgb();

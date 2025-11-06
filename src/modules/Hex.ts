@@ -1,8 +1,8 @@
+import type { AnyColorType, DefaultType, HexType } from "./Color.js";
 import ColorNotRgb from "./ColorNotRgb.js";
 
 export default class Hex extends ColorNotRgb {
-  validate = (...items) => {
-    let value = items.flat()[0];
+  validateHex = (value: HexType) => {
     let err = 0;
     if (typeof value !== "string") {
       err = 1;
@@ -24,9 +24,9 @@ export default class Hex extends ColorNotRgb {
     }
   };
 
-  toRgb(...items) {
-    let value = items.flat()[0];
-    this.validate(value);
+  toRgb(args: AnyColorType): DefaultType {
+    let value = args.toString();
+    this.validateHex(value);
     value = value.replace(/^#/, "");
     let hexInt = parseInt(value, 16);
     let r = (hexInt >> 16) & 255;

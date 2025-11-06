@@ -1,10 +1,11 @@
+import type { AnyColorType, DefaultType } from "./Color.js";
 import ColorNotRgb from "./ColorNotRgb.js";
 
 export default class Hsv extends ColorNotRgb{
-  validArray = [360, 100, 100];
+  override validArray = [360, 100, 100];
 
-  toRgb(...items) {
-    const value = items.flat();
+  toRgb(args:AnyColorType): DefaultType {
+    const value = args.flat() as DefaultType;
     this.validate(value);
     let h = value[0] / 360;
     let s = value[1] / 100;

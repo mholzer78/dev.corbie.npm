@@ -1,37 +1,32 @@
-import Color from "./Color.js";
+import Color, { type DefaultType } from "./Color.js";
 import Rgb from "./Rgb.js";
 
 export default abstract class ColorNotRgb extends Color {
   master: Rgb;
 
-  constructor(rgb) {
+  constructor(rgb: Rgb) {
     super();
     this.master = rgb;
   }
 
-  toHex(...items) {
-    let value = items.flat();
-    this.validate(value);
-    return this.master.toHex(this.toRgb(value));
+  toHex(args: DefaultType) {
+    this.validate(args);
+    return this.master.toHex(this.toRgb(args));
   }
-  toHwb(...items) {
-    let value = items.flat();
-    this.validate(value);
-    return this.master.toHwb(this.toRgb(value));
+  toHwb(args: DefaultType) {
+    this.validate(args);
+    return this.master.toHwb(this.toRgb(args));
   }
-  toHsv(...items) {
-    let value = items.flat();
-    this.validate(value);
-    return this.master.toHsv(this.toRgb(value));
+  toHsv(args: DefaultType) {
+    this.validate(args);
+    return this.master.toHsv(this.toRgb(args));
   }
-  toHsl(...items) {
-    let value = items.flat();
-    this.validate(value);
-    return this.master.toHsl(this.toRgb(value));
+  toHsl(args: DefaultType) {
+    this.validate(args);
+    return this.master.toHsl(this.toRgb(args));
   }
-  toCmyk(...items) {
-    let value = items.flat();
-    this.validate(value);
-    return this.master.toCmyk(this.toRgb(value));
+  toCmyk(args: DefaultType) {
+    this.validate(args);
+    return this.master.toCmyk(this.toRgb(args));
   }
 }
