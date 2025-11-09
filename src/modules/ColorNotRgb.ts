@@ -1,4 +1,4 @@
-import Color, { type DefaultType } from './Color.js';
+import Color, { type TDefault } from './Color.js';
 import Rgb from './Rgb.js';
 
 export default abstract class ColorNotRgb extends Color {
@@ -9,24 +9,28 @@ export default abstract class ColorNotRgb extends Color {
     this.master = rgb;
   }
 
-  toHex(args: DefaultType) {
+  toHex(args: TDefault) {
     this.validate(args);
     return this.master.toHex(this.toRgb(args));
   }
-  toHwb(args: DefaultType) {
+  toHwb(args: TDefault) {
     this.validate(args);
     return this.master.toHwb(this.toRgb(args));
   }
-  toHsv(args: DefaultType) {
+  toHsv(args: TDefault) {
     this.validate(args);
     return this.master.toHsv(this.toRgb(args));
   }
-  toHsl(args: DefaultType) {
+  toHsl(args: TDefault) {
     this.validate(args);
     return this.master.toHsl(this.toRgb(args));
   }
-  toCmyk(args: DefaultType) {
+  toCmyk(args: TDefault) {
     this.validate(args);
     return this.master.toCmyk(this.toRgb(args));
+  }
+  toName(args: TDefault) {
+    this.validate(args);
+    return this.master.toName(this.toRgb(args));
   }
 }

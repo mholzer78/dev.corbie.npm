@@ -1,26 +1,23 @@
 import Color from './Color.js';
-import type {
-  AnyColorType,
-  CmykType,
-  ColorType,
-  DefaultType,
-} from './Color.js';
+import colorsJson from '../colors.json' with { type: 'json' };
+import type { TDefault, TCmyk } from './Color.js';
 
 export default class Rgb extends Color {
   override validArray = [255, 255, 255];
 
-  toHex(args: DefaultType): string {
+  toHex(args: TDefault): string {
     this.validate(args);
-    return args.map((x) => x.toString(16).padStart(2, '0')).join('');
+    return args.map((x) => x.toString(16).padStart(2, '0')).join('') as string;
   }
 
-  toRgb(args: DefaultType): DefaultType {
+  toRgb(args: TDefault): TDefault {
     this.validate(args);
-    return args;
+    return args as TDefault;
   }
 
-  toHwb(args: DefaultType): DefaultType {
+  toHwb(args: TDefault): TDefault {
     this.validate(args);
+
     const [r, g, b] = this.splitRgb(args, 255);
     let max = Math.max(r, g, b);
     let min = Math.min(r, g, b);
@@ -41,12 +38,13 @@ export default class Rgb extends Color {
       Math.round(hue / 6),
       Math.round(white * 100),
       Math.round(black * 100),
-    ];
+    ] as TDefault;
   }
 
-  toHsv(args: DefaultType): DefaultType {
-    // https://gist.github.com/mjackson/5311256
+  toHsv(args: TDefault): TDefault {
     this.validate(args);
+
+    // https://gist.github.com/mjackson/5311256
     const [r, g, b] = this.splitRgb(args, 255);
 
     var max = Math.max(r, g, b),
@@ -79,12 +77,13 @@ export default class Rgb extends Color {
       Math.round(hue * 360),
       Math.round(sat * 1000) / 10,
       Math.round(val * 1000) / 10,
-    ];
+    ] as TDefault;
   }
 
-  toHsl(args: DefaultType): DefaultType {
-    // https://gist.github.com/mjackson/5311256
+  toHsl(args: TDefault): TDefault {
     this.validate(args);
+
+    // https://gist.github.com/mjackson/5311256
     const [r, g, b] = this.splitRgb(args, 255);
     let max = Math.max(r, g, b);
     let min = Math.min(r, g, b);
@@ -117,10 +116,11 @@ export default class Rgb extends Color {
       Math.round(hue * 360),
       Math.round(sat * 1000) / 10,
       Math.round(light * 1000) / 10,
-    ];
+    ] as TDefault;
   }
-  toCmyk(args: DefaultType): CmykType {
+  toCmyk(args: TDefault): TCmyk {
     this.validate(args);
+
     const [r, g, b] = this.splitRgb(args, 255);
     let c = 1 - r;
     let m = 1 - g;
@@ -141,10 +141,23 @@ export default class Rgb extends Color {
     y = isNaN(y) ? 0 : Math.round(y);
     k = isNaN(k) ? 0 : Math.round(k);
 
-    return [c, m, y, k];
+    return [c, m, y, k] as TCmyk;
+  }
+  toName(args: TDefault): string {
+    this.validate(args);
+
+    const color = colorsJson.filter(
+      (e) => JSON.stringify(e.rgb) === JSON.stringify(args),
+    );
+
+    if (!color.length) {
+      return 'No name found that matches this value';
+    } else {
+      return color[0]!.name;
+    }
   }
 
-  splitRgb(rgb: DefaultType, divider = 1): DefaultType {
+  splitRgb(rgb: TDefault, divider = 1): TDefault {
     const [r, g, b] = rgb;
     return [r / divider, g / divider, b / divider];
   }

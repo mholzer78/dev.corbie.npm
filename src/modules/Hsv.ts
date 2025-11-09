@@ -1,15 +1,14 @@
-import type { AnyColorType, DefaultType } from './Color.js';
+import type { TDefault } from './Color.js';
 import ColorNotRgb from './ColorNotRgb.js';
 
 export default class Hsv extends ColorNotRgb {
   override validArray = [360, 100, 100];
 
-  toRgb(args: AnyColorType): DefaultType {
-    const value = args as DefaultType;
-    this.validate(value);
-    let h = value[0] / 360;
-    let s = value[1] / 100;
-    let v = value[2] / 100;
+  toRgb(args: TDefault): TDefault {
+    this.validate(args);
+    let h = args[0] / 360;
+    let s = args[1] / 100;
+    let v = args[2] / 100;
     let r, g, b, i, f, p, q, t;
     i = Math.floor(h * 6);
     f = h * 6 - i;
@@ -38,6 +37,10 @@ export default class Hsv extends ColorNotRgb {
       default:
         [r, g, b] = [0, 0, 0];
     }
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    return [
+      Math.round(r * 255),
+      Math.round(g * 255),
+      Math.round(b * 255),
+    ] as TDefault;
   }
 }

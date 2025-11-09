@@ -1,51 +1,78 @@
 export type ColorType = string | number[];
-export type DefaultType = [number, number, number];
-export type HexType = string;
-export type CmykType = [number, number, number, number];
-export type AnyColorType = DefaultType | CmykType | HexType;
+
+export type TDefault = [number, number, number];
+export type TCmyk = [number, number, number, number];
+export type TRgbObj = { r: number; g: number; b: number };
+export type THslObj = { h: number; s: number; l: number };
+export type THsvObj = { h: number; s: number; v: number };
+export type THwbObj = { h: number; w: number; b: number };
+export type TCmykObj = { c: number; m: number; y: number; k: number };
+
+type InputArgs =
+  | TDefault
+  | TCmyk
+  | [TDefault]
+  | [TCmyk]
+  | [TRgbObj]
+  | [THslObj]
+  | [THsvObj]
+  | [THwbObj]
+  | [TCmykObj]
+  | [string];
 
 export default abstract class Color {
   validArray = [0, 0, 0];
 
-  hex(args: AnyColorType): HexType {
-    return this.toHex(args);
-  }
-  rgb(args: AnyColorType): DefaultType {
-    return this.toRgb(args as AnyColorType);
-  }
-  hwb(args: AnyColorType): DefaultType {
-    return this.toHwb(args);
-  }
-  hsv(args: AnyColorType): DefaultType {
-    return this.toHsv(args);
-  }
-  hsl(args: AnyColorType): DefaultType {
-    return this.toHsl(args);
-  }
-  cmyk(args: AnyColorType): CmykType {
-    return this.toCmyk(args);
+  normalizeArgs(args: InputArgs): number[] | string {
+    if (typeof args[0] === 'string') {
+      return args[0]; // a color keyword or hex
+    }
+
+    if (Array.isArray(args[0])) {
+      // [x, y, z] or [x, y, z, w]
+      return args[0];
+    }
+
+    if (typeof args[0] === 'object') {
+      // { x, y, z, w? }
+      return Object.values(args[0]);
+    }
+
+    // (x, y, z, [w])
+    return args as number[];
   }
 
-  abstract toHex(args: AnyColorType): HexType;
-  abstract toRgb(args: AnyColorType): DefaultType;
-  abstract toHwb(args: AnyColorType): DefaultType;
-  abstract toHsv(args: AnyColorType): DefaultType;
-  abstract toHsl(args: AnyColorType): DefaultType;
-  abstract toCmyk(args: AnyColorType): CmykType;
+  withNormalizedArgs<T>(
+    fn: (input: number[] | string) => T,
+  ): (...args: InputArgs) => T {
+    return (...args: InputArgs) => {
+      const input = this.normalizeArgs(args);
+      return fn(input);
+    };
+  }
 
-  validate = (value: AnyColorType) => {
+  rgb = this.withNormalizedArgs(this.toRgb.bind(this));
+  hex = this.withNormalizedArgs(this.toHex.bind(this));
+  hwb = this.withNormalizedArgs(this.toHwb.bind(this));
+  hsv = this.withNormalizedArgs(this.toHsv.bind(this));
+  hsl = this.withNormalizedArgs(this.toHsl.bind(this));
+  cmyk = this.withNormalizedArgs(this.toCmyk.bind(this));
+  name = this.withNormalizedArgs(this.toName.bind(this));
+
+  abstract toHex(args: ColorType): string;
+  abstract toRgb(args: ColorType): TDefault;
+  abstract toHwb(args: ColorType): TDefault;
+  abstract toHsv(args: ColorType): TDefault;
+  abstract toHsl(args: ColorType): TDefault;
+  abstract toCmyk(args: ColorType): TCmyk;
+  abstract toName(args: ColorType): string;
+
+  validate = (value: TDefault | TCmyk) => {
     let err = 0;
+    let errMsg = '';
     let errPosition = 0;
     let errRange = 0;
-    if (typeof value == 'string') {
-      value = value.toString();
-      value = value.replace(/^#/, '');
-      if (value.length !== 6) {
-        err = 11;
-      } else if (!value.match(/[0-9A-Fa-f]{6}/g)) {
-        err = 12;
-      }
-    } else if (typeof value !== 'object') {
+    if (typeof value !== 'object') {
       err = 1;
     } else if (value.length !== this.validArray.length) {
       err = 1;
@@ -64,7 +91,7 @@ export default abstract class Color {
       throw new Error(
         'Wrong input format. Should be an array with ' +
           this.validArray.length +
-          ' args.',
+          ' numeric args.',
       );
     } else if (err == 2) {
       throw new Error(
@@ -72,12 +99,6 @@ export default abstract class Color {
           errPosition +
           '] must be between 0 and ' +
           errRange,
-      );
-    } else if (err == 11) {
-      throw new Error("Wrong input format. Should be: '(#)abcdef'");
-    } else if (err == 12) {
-      throw new Error(
-        'Wrong input format. Each item should be between 0 and F',
       );
     }
   };

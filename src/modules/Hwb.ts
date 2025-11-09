@@ -1,13 +1,12 @@
-import type { AnyColorType, DefaultType } from './Color.js';
+import type { TDefault } from './Color.js';
 import ColorNotRgb from './ColorNotRgb.js';
 
 export default class Hwb extends ColorNotRgb {
   override validArray = [360, 100, 100];
 
-  toRgb(args: AnyColorType): DefaultType {
-    const value = args as DefaultType;
-    this.validate(value);
-    let [hue, white, black] = value;
+  toRgb(args: TDefault): TDefault {
+    this.validate(args);
+    let [hue, white, black] = args;
     white /= 100;
     black /= 100;
 
@@ -31,6 +30,6 @@ export default class Hwb extends ColorNotRgb {
       rgb[i] = (rgb[i]! * (1 - white - black) + white) * 255;
     }
 
-    return rgb.map((v) => Math.round(v)) as DefaultType;
+    return rgb.map((v) => Math.round(v)) as TDefault;
   }
 }
