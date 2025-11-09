@@ -1,6 +1,7 @@
 export type ColorType = string | number[];
 
 export type TDefault = [number, number, number];
+export type TString = string;
 export type TCmyk = [number, number, number, number];
 export type TRgbObj = { r: number; g: number; b: number };
 export type THslObj = { h: number; s: number; l: number };
@@ -12,13 +13,13 @@ type InputArgs =
   | TDefault
   | TCmyk
   | [TDefault]
+  | [TString]
   | [TCmyk]
   | [TRgbObj]
   | [THslObj]
   | [THsvObj]
   | [THwbObj]
-  | [TCmykObj]
-  | [string];
+  | [TCmykObj];
 
 export default abstract class Color {
   validArray = [0, 0, 0];

@@ -71,14 +71,15 @@ cbColorConvert.hex.rgb('#ffd801'); // [255,216,1]
 
 ### What comes in and what comes out?
 
-| color-space | input                             | example                                                     | output   |
-| ----------- | --------------------------------- | ----------------------------------------------------------- | -------- |
-| hex         | string                            | `#ffd801` or `ffd801`                                       | string   |
-| rgb         | 3 params or Array[3] or {r,g,b}   | `255,216,1` or `[255,216,1]` or `{r:255, g:216, b:1}`       | Array[3] |
-| hwb         | 3 params or Array[3] or {h,w,b}   | `255,216,1` or `[255,216,1]` or `{h:51, w:0, b:0}`          | Array[3] |
-| hsv         | 3 params or Array[3] or {h,s,v}   | `255,216,1` or `[255,216,1]` or `{r:51, g:100, b:100}`      | Array[3] |
-| hsl         | 3 params or Array[3] or {h,s,l}   | `255,216,1` or `[255,216,1]` or `{r:51, g:100, b:50}`       | Array[3] |
-| cmyk        | 4 params or Array[4] or {c,m,y,k} | `0,15,100,0` or `[0,15,100,0]` or `{c:0, m:15, y:100, k:0}` | Array[4] |
+| color-space | input                             | TS-type  | example                                                     | output   |
+| ----------- | --------------------------------- | -------- | ----------------------------------------------------------- | -------- |
+| hex         | string                            | string   | `#ffd801` or `ffd801`                                       | string   |
+| name        | string                            | string   | `palegreen` or `coral`                                      | string   |
+| rgb         | 3 params or Array[3] or {r,g,b}   | TDefault | `255,216,1` or `[255,216,1]` or `{r:255, g:216, b:1}`       | Array[3] |
+| hwb         | 3 params or Array[3] or {h,w,b}   | TDefault | `255,216,1` or `[255,216,1]` or `{h:51, w:0, b:0}`          | Array[3] |
+| hsv         | 3 params or Array[3] or {h,s,v}   | TDefault | `255,216,1` or `[255,216,1]` or `{r:51, g:100, b:100}`      | Array[3] |
+| hsl         | 3 params or Array[3] or {h,s,l}   | TDefault | `255,216,1` or `[255,216,1]` or `{r:51, g:100, b:50}`       | Array[3] |
+| cmyk        | 4 params or Array[4] or {c,m,y,k} | TCmyk    | `0,15,100,0` or `[0,15,100,0]` or `{c:0, m:15, y:100, k:0}` | Array[4] |
 
 > **_NOTE:_** For the HEX input the leading # (hash) is optional, the output won't include it.
 
