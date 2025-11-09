@@ -1,6 +1,6 @@
 {
   "name": "@corbie.dev/color-convert",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Color converter (HEX, RGB, CMYK, HSL, HSV, ...)",
   "scripts": {
     "build": "tsc",

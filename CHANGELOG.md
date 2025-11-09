@@ -1,5 +1,11 @@
 # dev.corbie.npm
 
+## 1.0.2
+
+### Patch Changes
+
+- 4975cca: Changed Types
+
 ## 1.0.0
 
 ### Major Changes
