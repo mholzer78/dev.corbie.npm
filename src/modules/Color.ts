@@ -1,25 +1,25 @@
 export type ColorType = string | number[];
 
-export type TDefault = [number, number, number];
-export type TString = string;
-export type TCmyk = [number, number, number, number];
-export type TRgbObj = { r: number; g: number; b: number };
-export type THslObj = { h: number; s: number; l: number };
-export type THsvObj = { h: number; s: number; v: number };
-export type THwbObj = { h: number; w: number; b: number };
-export type TCmykObj = { c: number; m: number; y: number; k: number };
+export type TCbDefault = [number, number, number];
+export type TCbString = string;
+export type TCbCmyk = [number, number, number, number];
+export type TCbRgbObj = { r: number; g: number; b: number };
+export type TCbHslObj = { h: number; s: number; l: number };
+export type TCbHsvObj = { h: number; s: number; v: number };
+export type TCbHwbObj = { h: number; w: number; b: number };
+export type TCbCmykObj = { c: number; m: number; y: number; k: number };
 
 type InputArgs =
-  | TDefault
-  | TCmyk
-  | [TDefault]
-  | [TString]
-  | [TCmyk]
-  | [TRgbObj]
-  | [THslObj]
-  | [THsvObj]
-  | [THwbObj]
-  | [TCmykObj];
+  | TCbDefault
+  | TCbCmyk
+  | [TCbDefault]
+  | [TCbString]
+  | [TCbCmyk]
+  | [TCbRgbObj]
+  | [TCbHslObj]
+  | [TCbHsvObj]
+  | [TCbHwbObj]
+  | [TCbCmykObj];
 
 export default abstract class Color {
   validArray = [0, 0, 0];
@@ -61,14 +61,14 @@ export default abstract class Color {
   name = this.withNormalizedArgs(this.toName.bind(this));
 
   abstract toHex(args: ColorType): string;
-  abstract toRgb(args: ColorType): TDefault;
-  abstract toHwb(args: ColorType): TDefault;
-  abstract toHsv(args: ColorType): TDefault;
-  abstract toHsl(args: ColorType): TDefault;
-  abstract toCmyk(args: ColorType): TCmyk;
+  abstract toRgb(args: ColorType): TCbDefault;
+  abstract toHwb(args: ColorType): TCbDefault;
+  abstract toHsv(args: ColorType): TCbDefault;
+  abstract toHsl(args: ColorType): TCbDefault;
+  abstract toCmyk(args: ColorType): TCbCmyk;
   abstract toName(args: ColorType): string;
 
-  validate = (value: TDefault | TCmyk) => {
+  validate = (value: TCbDefault | TCbCmyk) => {
     let err = 0;
     let errMsg = '';
     let errPosition = 0;
