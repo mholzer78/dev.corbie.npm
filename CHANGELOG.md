@@ -1,5 +1,11 @@
 # dev.corbie.npm
 
+## 1.0.1
+
+### Patch Changes
+
+- 9afbb67: Fixed Types
+
 ## 1.0.2
 
 ### Patch Changes
