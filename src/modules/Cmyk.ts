@@ -1,10 +1,10 @@
 import ColorNotRgb from './ColorNotRgb.js';
-import type { TCmyk, TDefault } from './Color.js';
+import type { TCbCmyk, TCbDefault } from './Color.js';
 
 export default class Cmyk extends ColorNotRgb {
   override validArray = [100, 100, 100, 100];
 
-  toRgb(args: TCmyk): TDefault {
+  toRgb(args: TCbCmyk): TCbDefault {
     this.validate(args);
     let c = args[0] / 100;
     let m = args[1] / 100;
@@ -23,6 +23,6 @@ export default class Cmyk extends ColorNotRgb {
     g = Math.round(255 * g);
     b = Math.round(255 * b);
 
-    return [r, g, b] as TDefault;
+    return [r, g, b] as TCbDefault;
   }
 }

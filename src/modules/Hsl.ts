@@ -1,10 +1,10 @@
-import type { TDefault } from './Color.js';
+import type { TCbDefault } from './Color.js';
 import ColorNotRgb from './ColorNotRgb.js';
 
 export default class Hsl extends ColorNotRgb {
   override validArray = [360, 100, 100];
 
-  toRgb(args: TDefault): TDefault {
+  toRgb(args: TCbDefault): TCbDefault {
     this.validate(args);
     const h = args[0];
     const s = args[1] / 100;
@@ -34,6 +34,6 @@ export default class Hsl extends ColorNotRgb {
     g = Math.round((g + m) * 255);
     b = Math.round((b + m) * 255);
 
-    return [r, g, b] as TDefault;
+    return [r, g, b] as TCbDefault;
   }
 }

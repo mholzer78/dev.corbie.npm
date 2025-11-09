@@ -1,21 +1,21 @@
 import Color from './Color.js';
 import colorsJson from '../colors.json' with { type: 'json' };
-import type { TDefault, TCmyk } from './Color.js';
+import type { TCbDefault, TCbCmyk } from './Color.js';
 
 export default class Rgb extends Color {
   override validArray = [255, 255, 255];
 
-  toHex(args: TDefault): string {
+  toHex(args: TCbDefault): string {
     this.validate(args);
     return args.map((x) => x.toString(16).padStart(2, '0')).join('') as string;
   }
 
-  toRgb(args: TDefault): TDefault {
+  toRgb(args: TCbDefault): TCbDefault {
     this.validate(args);
-    return args as TDefault;
+    return args as TCbDefault;
   }
 
-  toHwb(args: TDefault): TDefault {
+  toHwb(args: TCbDefault): TCbDefault {
     this.validate(args);
 
     const [r, g, b] = this.splitRgb(args, 255);
@@ -38,10 +38,10 @@ export default class Rgb extends Color {
       Math.round(hue / 6),
       Math.round(white * 100),
       Math.round(black * 100),
-    ] as TDefault;
+    ] as TCbDefault;
   }
 
-  toHsv(args: TDefault): TDefault {
+  toHsv(args: TCbDefault): TCbDefault {
     this.validate(args);
 
     // https://gist.github.com/mjackson/5311256
@@ -77,10 +77,10 @@ export default class Rgb extends Color {
       Math.round(hue * 360),
       Math.round(sat * 1000) / 10,
       Math.round(val * 1000) / 10,
-    ] as TDefault;
+    ] as TCbDefault;
   }
 
-  toHsl(args: TDefault): TDefault {
+  toHsl(args: TCbDefault): TCbDefault {
     this.validate(args);
 
     // https://gist.github.com/mjackson/5311256
@@ -116,9 +116,9 @@ export default class Rgb extends Color {
       Math.round(hue * 360),
       Math.round(sat * 1000) / 10,
       Math.round(light * 1000) / 10,
-    ] as TDefault;
+    ] as TCbDefault;
   }
-  toCmyk(args: TDefault): TCmyk {
+  toCmyk(args: TCbDefault): TCbCmyk {
     this.validate(args);
 
     const [r, g, b] = this.splitRgb(args, 255);
@@ -141,9 +141,9 @@ export default class Rgb extends Color {
     y = isNaN(y) ? 0 : Math.round(y);
     k = isNaN(k) ? 0 : Math.round(k);
 
-    return [c, m, y, k] as TCmyk;
+    return [c, m, y, k] as TCbCmyk;
   }
-  toName(args: TDefault): string {
+  toName(args: TCbDefault): string {
     this.validate(args);
 
     const color = colorsJson.filter(
@@ -157,7 +157,7 @@ export default class Rgb extends Color {
     }
   }
 
-  splitRgb(rgb: TDefault, divider = 1): TDefault {
+  splitRgb(rgb: TCbDefault, divider = 1): TCbDefault {
     const [r, g, b] = rgb;
     return [r / divider, g / divider, b / divider];
   }
