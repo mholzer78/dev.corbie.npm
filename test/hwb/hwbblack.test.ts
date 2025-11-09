@@ -1,6 +1,6 @@
 import cbColorConvert from '../../src/index.js';
 import { test, expect } from 'vitest';
-import colors from '../colors.js';
+import colors from '../colors.json';
 import { TCbDefault } from '../../src/modules/Color.js';
 
 let master = colors.black;

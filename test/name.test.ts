@@ -1,6 +1,6 @@
 import cbColorConvert from '../src/index.js';
 import { test, expect } from 'vitest';
-import colors from './colors.js';
+import colors from './colors.json';
 
 for (const [key, value] of Object.entries(colors)) {
   if (value.name !== 'No name found that matches this value') {
