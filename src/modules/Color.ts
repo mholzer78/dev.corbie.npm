@@ -1,7 +1,6 @@
 export type ColorType = string | number[];
 
 export type TCbDefault = [number, number, number];
-export type TCbString = string;
 export type TCbCmyk = [number, number, number, number];
 export type TCbRgbObj = { r: number; g: number; b: number };
 export type TCbHslObj = { h: number; s: number; l: number };
@@ -13,13 +12,13 @@ type InputArgs =
   | TCbDefault
   | TCbCmyk
   | [TCbDefault]
-  | [TCbString]
   | [TCbCmyk]
   | [TCbRgbObj]
   | [TCbHslObj]
   | [TCbHsvObj]
   | [TCbHwbObj]
-  | [TCbCmykObj];
+  | [TCbCmykObj]
+  | [string];
 
 export default abstract class Color {
   validArray = [0, 0, 0];

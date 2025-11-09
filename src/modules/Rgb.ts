@@ -150,10 +150,10 @@ export default class Rgb extends Color {
       (e) => JSON.stringify(e.rgb) === JSON.stringify(args),
     );
 
-    if (!color) {
-      return 'No name found that matches this value';
-    } else {
+    if (color) {
       return color.name;
+    } else {
+      return 'No name found that matches this value';
     }
   }
 
