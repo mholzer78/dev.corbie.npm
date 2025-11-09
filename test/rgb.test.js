@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 import colors from './colors.js';
 
 for (const [key, value] of Object.entries(colors)) {
-  test('rgb2hex  as params ' + key, () => {
+  test('rgb2hex as params ' + key, () => {
     expect(cbColorConvert.rgb.hex(...value.rgb)).toBe(value.hex);
   });
   test('rgb2hex as object ' + key, () => {

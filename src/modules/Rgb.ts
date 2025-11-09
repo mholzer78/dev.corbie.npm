@@ -7,12 +7,12 @@ export default class Rgb extends Color {
 
   toHex(args: TCbDefault): string {
     this.validate(args);
-    return args.map((x) => x.toString(16).padStart(2, '0')).join('') as string;
+    return args.map((x) => x.toString(16).padStart(2, '0')).join('');
   }
 
   toRgb(args: TCbDefault): TCbDefault {
     this.validate(args);
-    return args as TCbDefault;
+    return args;
   }
 
   toHwb(args: TCbDefault): TCbDefault {
@@ -47,13 +47,13 @@ export default class Rgb extends Color {
     // https://gist.github.com/mjackson/5311256
     const [r, g, b] = this.splitRgb(args, 255);
 
-    var max = Math.max(r, g, b),
+    const max = Math.max(r, g, b),
       min = Math.min(r, g, b);
-    var hue,
+    let hue,
       sat,
       val = max;
 
-    var delta = max - min;
+    const delta = max - min;
     sat = max == 0 ? 0 : delta / max;
 
     hue = 0; // achromatic
@@ -136,24 +136,24 @@ export default class Rgb extends Color {
     y = Math.round(y * 10000) / 100;
     k = Math.round(k * 10000) / 100;
 
-    c = isNaN(c) ? 0 : Math.round(c);
-    m = isNaN(m) ? 0 : Math.round(m);
-    y = isNaN(y) ? 0 : Math.round(y);
-    k = isNaN(k) ? 0 : Math.round(k);
+    c = Number.isNaN(c) ? 0 : Math.round(c);
+    m = Number.isNaN(m) ? 0 : Math.round(m);
+    y = Number.isNaN(y) ? 0 : Math.round(y);
+    k = Number.isNaN(k) ? 0 : Math.round(k);
 
     return [c, m, y, k] as TCbCmyk;
   }
   toName(args: TCbDefault): string {
     this.validate(args);
 
-    const color = colorsJson.filter(
+    const color = colorsJson.find(
       (e) => JSON.stringify(e.rgb) === JSON.stringify(args),
     );
 
-    if (!color.length) {
+    if (!color) {
       return 'No name found that matches this value';
     } else {
-      return color[0]!.name;
+      return color.name;
     }
   }
 

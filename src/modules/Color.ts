@@ -73,20 +73,19 @@ export default abstract class Color {
     let errMsg = '';
     let errPosition = 0;
     let errRange = 0;
-    if (typeof value !== 'object') {
+    if (typeof value !== 'object' || value.length !== this.validArray.length) {
       err = 1;
-    } else if (value.length !== this.validArray.length) {
-      err = 1;
-    } else {
-      value.forEach((val, index) => {
-        if (typeof val !== 'number') {
+    }
+    if (err == 0) {
+      for (const [index, element] of value.entries()) {
+        if (typeof element !== 'number') {
           err = 1;
-        } else if (val < 0 || val > this.validArray[index]!) {
+        } else if (element < 0 || element > this.validArray[index]!) {
           err = 2;
           errPosition = index;
           errRange = this.validArray[index]!;
         }
-      });
+      }
     }
     if (err == 1) {
       throw new Error(

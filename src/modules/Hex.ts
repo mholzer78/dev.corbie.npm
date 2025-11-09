@@ -19,7 +19,7 @@ export default class Hex extends ColorNotRgb {
     this.validate(args);
     let value = args.toString();
     value = value.replace(/^#/, '');
-    let hexInt = parseInt(value, 16);
+    let hexInt = Number.parseInt(value, 16);
     let r = (hexInt >> 16) & 255;
     let g = (hexInt >> 8) & 255;
     let b = hexInt & 255;
