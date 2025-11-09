@@ -1,5 +1,11 @@
 # dev.corbie.npm
 
+## 1.0.0
+
+### Major Changes
+
+- dac31d7: enhanced testing and bugfixing
+
 ## 0.0.12
 
 ### Patch Changes
